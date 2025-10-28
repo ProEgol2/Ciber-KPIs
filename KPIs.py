@@ -60,9 +60,12 @@ print(f"Percentage of responses on term (30 days): {response_on_term_percentage:
 
 incidents_mitigated = ((incident_df['mitigated'] == True).sum() / n_incidents) * 100
 incicents_reported_on_term = ((((incident_df['report_date'] - incident_df['occurrence_date']).dt.days <= 2).sum()) / n_incidents) * 100
+incidents_critical = incident_df[incident_df['severity'] == 'Critical']
+incidents_mitigated_critical = (incidents_critical['mitigated'].sum() / len(incidents_critical)) * 100
 
 print(f"Percentage of incidents mitigated: {incidents_mitigated:.2f}%")
 print(f"Percentage of incidents reported on term (2 days): {incicents_reported_on_term:.2f}%")
+print(f"Critical incidents mitigated rate: {incidents_mitigated_critical:.2f}%")
 
 ## ------------------------------------------------------------------------- ##
 
